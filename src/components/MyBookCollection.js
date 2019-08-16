@@ -6,7 +6,8 @@ class MyBookCollection extends React.Component {
     state = {
         currentlyReading: [],
         toRead: [],
-        read: []
+        read: [],
+        value: ''
     }
     componentDidMount() {
         if(book){
@@ -20,7 +21,7 @@ class MyBookCollection extends React.Component {
                 if(book.id === '1'){
                     // currentState.currentlyReading.push(book)
                     currentState = { ...currentState, currentlyReading: [ ...currentState.currentlyReading, book ] }
-                    console.log(currentState)            
+                    // console.log(currentState)            
                 }
                 if(book.id === '2'){
                     currentState = { ...currentState, toRead: [ ...currentState.toRead, book ] }
@@ -33,19 +34,20 @@ class MyBookCollection extends React.Component {
             this.setState(prev => currentState)
         }
     }
-    // handleSearch = (book) => {
-    //     for(let i = 0; i < book.length; i++){
-            
-    //     }
-    // }
+    onInputChange = (event) => {
+        this.setState({ value: event.target.value })
+        console.log(event.target.value)
+        let filteredBook = book.filter(book => book.title === event.target.value)
+        console.log('Searched Book', filteredBook);
+    }
     render(){
-        console.log('state', this.state)
+        // console.log('state', this.state)
         return(
             <div>
                 <div className="books-title">
                     <h1>My Book Collection</h1>
                 </div>
-                <input type="text" onKeyUp={this.handleSearch} placeholder="search" />
+                <input type="text" onChange={this.onInputChange} value={this.state.value} placeholder="search" />
                 <div>
                     <BookShelf title='Currently Reading' books={this.state.currentlyReading} />
                     <BookShelf title='To Read' books={this.state.toRead} />
