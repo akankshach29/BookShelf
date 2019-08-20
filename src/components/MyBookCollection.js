@@ -1,15 +1,20 @@
 import React from 'react'
 import BookShelf from './BookShelf'
 import book from '../BooksJsonData'
+import Book from './Book'
 
 class MyBookCollection extends React.Component {
+    
     state = {
         currentlyReading: [],
         toRead: [],
         read: [],
-        value: ''
+        value: '',
+        filtered: []
     }
     componentDidMount() {
+        console.log(window.books);
+        
         if(book){
             let currentState = {
                 currentlyReading: [],
@@ -36,18 +41,29 @@ class MyBookCollection extends React.Component {
     }
     onInputChange = (event) => {
         this.setState({ value: event.target.value })
-        console.log(event.target.value)
+        // console.log(event.target.value)
         let filteredBook = book.filter(book => book.title === event.target.value)
-        console.log('Searched Book', filteredBook);
+        // console.log('Searched Book', filteredBook);
+        this.setState({filtered: filteredBook});
+
     }
     render(){
-        // console.log('state', this.state)
+        // console.log('state', this.state.filtered)
         return(
             <div>
                 <div className="books-title">
                     <h1>My Book Collection</h1>
                 </div>
                 <input type="text" onChange={this.onInputChange} value={this.state.value} placeholder="search" />
+                <div>
+                    {
+                        this.state.filtered.map(eachBook => (
+                            <li key={eachBook.id}>
+                                <Book book={eachBook} />
+                            </li>
+                        ))
+                    }
+                </div>
                 <div>
                     <BookShelf title='Currently Reading' books={this.state.currentlyReading} />
                     <BookShelf title='To Read' books={this.state.toRead} />

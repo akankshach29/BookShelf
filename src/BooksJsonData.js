@@ -1,4 +1,4 @@
-const book = [
+var book = [
     {
         id: '1',
         bookImg: 'https://miro.medium.com/max/1838/1*YdGqkz_Z9NTgmMwpS0x_Vw.jpeg',
@@ -17,6 +17,6 @@ const book = [
         title: 'The start-up of you',
         author: 'Reid Hoffman'
     }
-];
+]
 
 export default book;
