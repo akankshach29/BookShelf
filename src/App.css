@@ -29,3 +29,9 @@
 .book-img{
   width: 200px;
 }
+.books-flex{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  flex-direction: row;
+}

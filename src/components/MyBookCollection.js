@@ -28,7 +28,7 @@ class MyBookCollection extends React.Component {
                     currentState = { ...currentState, currentlyReading: [ ...currentState.currentlyReading, book ] }
                     // console.log(currentState)            
                 }
-                if(book.id === '2'){
+                if(book.id === '2' || book.id === '4'){
                     currentState = { ...currentState, toRead: [ ...currentState.toRead, book ] }
                 }
                 if(book.id === '3'){
@@ -42,7 +42,7 @@ class MyBookCollection extends React.Component {
     onInputChange = (event) => {
         this.setState({ value: event.target.value })
         // console.log(event.target.value)
-        let filteredBook = book.filter(book => book.title === event.target.value)
+        let filteredBook = book.filter(book => book.title.includes(event.target.value))
         // console.log('Searched Book', filteredBook);
         this.setState({filtered: filteredBook});
 
@@ -55,7 +55,7 @@ class MyBookCollection extends React.Component {
                     <h1>My Book Collection</h1>
                 </div>
                 <input type="text" onChange={this.onInputChange} value={this.state.value} placeholder="search" />
-                <div>
+                <div className="books-flex">
                     {
                         this.state.filtered.map(eachBook => (
                             <li key={eachBook.id}>
