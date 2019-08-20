@@ -9,8 +9,6 @@ class MyBookCollection extends React.Component {
         currentlyReading: [],
         toRead: [],
         read: [],
-        value: '',
-        filtered: []
     }
     componentDidMount() {
         console.log(window.books);
@@ -39,30 +37,12 @@ class MyBookCollection extends React.Component {
             this.setState(prev => currentState)
         }
     }
-    onInputChange = (event) => {
-        this.setState({ value: event.target.value })
-        // console.log(event.target.value)
-        let filteredBook = book.filter(book => book.title.includes(event.target.value))
-        // console.log('Searched Book', filteredBook);
-        this.setState({filtered: filteredBook});
-
-    }
     render(){
         // console.log('state', this.state.filtered)
         return(
             <div>
                 <div className="books-title">
                     <h1>My Book Collection</h1>
-                </div>
-                <input type="text" onChange={this.onInputChange} value={this.state.value} placeholder="search" />
-                <div className="books-flex">
-                    {
-                        this.state.filtered.map(eachBook => (
-                            <li key={eachBook.id}>
-                                <Book book={eachBook} />
-                            </li>
-                        ))
-                    }
                 </div>
                 <div>
                     <BookShelf title='Currently Reading' books={this.state.currentlyReading} />

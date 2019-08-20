@@ -1,24 +1,34 @@
 import React from 'react'
 import book from '../BooksJsonData'
+import Book from './Book'
 
 class BookSearch extends React.Component {
     state = {
-        value: ''
+        value: '',
+        filtered: []
     }
     onInputChange = (event) => {
         this.setState({ value: event.target.value })
-        console.log(event.target.value)
-        let filteredBook = book.filter(book => book.title === event.target.value)
-        console.log('Searched Book', filteredBook);
+        let filteredBook = book.filter(book => book.title.includes(event.target.value))
+        this.setState({filtered: filteredBook});
+
     }
     render(){
-        // console.log('state', this.state)
         return(
             <div>
                 <div className="books-title">
                     <h1>Books</h1>
                 </div>
-                <input type="text" onChange={this.onInputChange} value={this.state.value} placeholder="search" />
+                <input className="searchbox" type="text" onChange={this.onInputChange} value={this.state.value} placeholder="search book" />
+                <div className="books-flex">
+                    {
+                        this.state.filtered.map(eachBook => (
+                            <li key={eachBook.id}>
+                                <Book book={eachBook} />
+                            </li>
+                        ))
+                    }
+                </div>
             </div>
         )
     }

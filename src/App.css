@@ -35,3 +35,7 @@
   justify-content: space-evenly;
   flex-direction: row;
 }
+.searchbox{
+  padding: 8px;
+  width: 200px;
+}
