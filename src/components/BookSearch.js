@@ -22,11 +22,18 @@ class BookSearch extends React.Component {
                 <input className="searchbox" type="text" onChange={this.onInputChange} value={this.state.value} placeholder="search book" />
                 <div className="books-flex">
                     {
+                        (this.state.filtered.length !== 0) ?
                         this.state.filtered.map(eachBook => (
-                            <li key={eachBook.id}>
+                            <ul key={eachBook.id}>
                                 <Book book={eachBook} />
-                            </li>
+                            </ul>
+                        )) :
+                        book.map(eachBook => (
+                            <ul key={eachBook.id}>
+                                <Book book={eachBook} />
+                            </ul>
                         ))
+                        
                     }
                 </div>
             </div>

@@ -47,7 +47,7 @@ class MyBookCollection extends React.Component {
                 <div>
                     <BookShelf title='Currently Reading' books={this.state.currentlyReading} />
                     <BookShelf title='To Read' books={this.state.toRead} />
-                    <BookShelf title='Read' books={this.state.read} />
+                    <BookShelf title='Past Reading' books={this.state.read} />
                 </div>
             </div>
         )
